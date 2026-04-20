@@ -54,6 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMovement()
     {
+
         currentSpeed += moveInput * acceleration * Time.fixedDeltaTime;
 
         currentSpeed = Mathf.Clamp(currentSpeed, -maxSpeed/2, maxSpeed);
