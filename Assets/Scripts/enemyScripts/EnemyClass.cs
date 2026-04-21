@@ -1,31 +1,29 @@
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public abstract class EnemyClass : MonoBehaviour
 {
-    [SerializeField] private Transform playerTransform;   // Drag your player here in Inspector
-    [SerializeField] private float speed = 3f;
+    [SerializeField] private Transform playerTransform;
+    [SerializeField] private float rotationSpeed = 45f;
     [SerializeField] private float atackDistance = 8;
 
 
 
     void Update()
     {
+        lookAtPlayer();
+    }
+    private void lookAtPlayer()
+    {
         float playerDistance = Vector2.Distance(transform.position, playerTransform.position);
         if (playerTransform != null && playerDistance <= atackDistance)
         {
-
-            // Move enemy toward player
-            transform.position = Vector2.MoveTowards(
-                transform.position,
-                playerTransform.position,
-                speed * Time.deltaTime
-            );
-
+            Vector2 direction = playerTransform.position - transform.position;
+            transform.up = direction;
         }
         else
         {
-            transform.Translate(Vector2.up * speed * Time.deltaTime);
-            transform.Rotate(0, 0, 100 * Time.deltaTime);
+            transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
         }
     }
 }
