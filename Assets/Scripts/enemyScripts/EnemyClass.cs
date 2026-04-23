@@ -12,6 +12,7 @@ public abstract class EnemyClass : MonoBehaviour
     void Update()
     {
         lookAtPlayer();
+        AttackPlayer();
     }
     private void lookAtPlayer()
     {
@@ -26,4 +27,5 @@ public abstract class EnemyClass : MonoBehaviour
             transform.Rotate(Vector3.forward * rotationSpeed * Time.deltaTime);
         }
     }
+    public abstract void AttackPlayer();
 }
